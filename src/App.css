@@ -36,3 +36,33 @@
     transform: rotate(360deg);
   }
 }
+
+.heading {
+  color: red;
+}
+
+.current-time {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 1.5em;
+  color: #4CAF50;
+}
+
+.event-card {
+  border: 1px solid #ddd;
+  padding: 16px;
+  margin: 10px 0;
+  border-radius: 8px;
+  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.event-title {
+  font-size: 1.5em;
+  color: #333;
+  margin-bottom: 8px;
+}
+
+.event-date, .event-location {
+  color: #555;
+  margin: 4px 0;
+}

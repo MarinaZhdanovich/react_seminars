@@ -1,16 +1,26 @@
 import './App.css';
 import Greeting from './components/Greeting';
-import EventCard from './components/Greeting';
-import CurrentTime from './components/Greeting';
+import EventCard from './components/EventCard';
+import CurrentTime from './components/CurrentTime';
+import Counter from './components/Counter';
+import Show from './components/Visible';
+import Timer from './components/Timer';
+import RefExample from './components/RefExample';
+import MessagesList from './components/List';
 
 function App() {
   const userName = 'Marina';
   return (
     <div>
       <h1>Hello {userName}</h1>
+      <MessagesList />
+      <RefExample />
+      <Timer />
+      <Counter />
+      <Show data="Марина, everything will be ok" />
+      <Show data="ПОНЯТНО?" />
       <Article number='1' name='Info' />
       <Article number='2' name='Blog' />
-      <h1>Привет, моя Марина!</h1>
       <Greeting />
       <CurrentTime />
       <div>

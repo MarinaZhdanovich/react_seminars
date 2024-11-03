@@ -13,6 +13,13 @@ export function MessagesList() {
       <div key={message.id}>{message.text}</div>
     </>
   );
+
+  // return messages.map((message) => (
+  //   <React.Fragment key={message.id}>
+  //     <h2>{message.heading}</h2>
+  //     <div>{message.text}</div>
+  //   </React.Fragment>
+  // ));
 }
 
 

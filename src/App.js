@@ -7,12 +7,18 @@ import Show from './components/Visible';
 import Timer from './components/Timer';
 import RefExample from './components/RefExample';
 import MessagesList from './components/List';
+import Counter2 from './components/Counter2';
+import TextInput from './components/TextInput';
+import TodoList from './components/TodoList';
 
 function App() {
   const userName = 'Marina';
   return (
     <div>
       <h1>Hello {userName}</h1>
+      <TodoList />
+      <TextInput />
+      <Counter2 />
       <MessagesList />
       <RefExample />
       <Timer />

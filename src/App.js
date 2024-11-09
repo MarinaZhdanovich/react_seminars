@@ -10,13 +10,21 @@ import MessagesList from './components/List';
 import Counter2 from './components/Counter2';
 import TextInput from './components/TextInput';
 import TodoList from './components/TodoList';
+import ParentCounter from './lesson3/parent';
+import InputForm from './lesson3/Form';
+import Nav from './lesson3/header';
+import HoverRating from './lesson3/raiting';
 
 function App() {
   const userName = 'Marina';
   return (
     <div>
-      <h1>Hello {userName}</h1>
-      <TodoList />
+      <ParentCounter />
+      <InputForm />
+      <Nav />
+      <HoverRating />
+      {/* <h1>Hello {userName}</h1> */}
+      {/* <TodoList />
       <TextInput />
       <Counter2 />
       <MessagesList />
@@ -47,8 +55,8 @@ function App() {
           date="12 ноября 2024, 12:00"
           location="Нижний Новгород, Парк культуры и отдыха"
           booleanS={false}
-        />
-      </div>
+        /> */}
+      {/* </div> */}
     </div>
   );
 }

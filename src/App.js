@@ -14,11 +14,13 @@ import ParentCounter from './lesson3/parent';
 import InputForm from './lesson3/Form';
 import Nav from './lesson3/header';
 import HoverRating from './lesson3/raiting';
+import Student from './lesson3/PropType';
 
 function App() {
   const userName = 'Marina';
   return (
     <div>
+      <Student name='Marina' age={30} isStudent={true} />
       <ParentCounter />
       <InputForm />
       <Nav />

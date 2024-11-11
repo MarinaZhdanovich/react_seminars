@@ -6,7 +6,7 @@ import Counter from './components/Counter';
 import Show from './components/Visible';
 import Timer from './components/Timer';
 import RefExample from './components/RefExample';
-import MessagesList from './components/List';
+import MessagesList from './lesson3/MessageList';
 import Counter2 from './components/Counter2';
 import TextInput from './components/TextInput';
 import TodoList from './components/TodoList';
@@ -15,16 +15,24 @@ import InputForm from './lesson3/Form';
 import Nav from './lesson3/header';
 import HoverRating from './lesson3/raiting';
 import Student from './lesson3/PropType';
-
+import Greeting2 from './lesson3/Greeting';
+import CounterLesson3 from './lesson3/CounterLesson';
+import ThemeSwitcher from './lesson3/ThemeSwitcher';
+import TextDisplayForm from './lesson3/TextDisplayForm';
 function App() {
   const userName = 'Marina';
   return (
     <div>
-      <Student name='Marina' age={30} isStudent={true} />
+      <Greeting2 name='Marina' />
+      <CounterLesson3 />
+      <MessagesList text='Мяу Мяу' />
+      <ThemeSwitcher />
+      <TextDisplayForm />
+      {/* <Student name='Marina' age={30} isStudent={true} />
       <ParentCounter />
       <InputForm />
       <Nav />
-      <HoverRating />
+      <HoverRating /> */}
       {/* <h1>Hello {userName}</h1> */}
       {/* <TodoList />
       <TextInput />

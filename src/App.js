@@ -5,6 +5,11 @@ import ArticleList from './lesson4/ArticleList';
 import { BrowserRouter, Routes, Route, Router } from 'react-router-dom';
 import ProductList from './lesson4/ProductList';
 import ProductDetail from './lesson4/ProductDetail';
+import Box from './lesson4/Box';
+import List from './lesson4/List';
+import DetailPage from './lesson4/DetailPage';
+import ListPage from './lesson4/ListPage';
+
 
 const articles = [
   { id: 1, title: 'Статья 1', content: 'Содержимое статьи 1' },
@@ -22,6 +27,23 @@ const products = [
   { id: 6, name: "Товар 6", description: "Описание товара 6", price: "600 руб." },
 ]
 
+const items = [
+  { id: 1, name: 'Страница 1' },
+  { id: 2, name: 'Страница 2' },
+  { id: 3, name: 'Страница 3' },
+];
+
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<ListPage items={items} />} />
+        <Route path="/detail/:id" element={<DetailPage items={items} />} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
 
 // const App = () => (
 //   <BrowserRouter> {/* Используем BrowserRouter */}
@@ -35,15 +57,51 @@ const products = [
 //   </BrowserRouter>
 // );
 
-const App = () => (
-  <BrowserRouter>
-    <Routes>
-      <Route path="/page/:pageNumber" element={<ProductList products={products} />} />
-      <Route path="/product/:productId" element={<ProductDetail products={products} />} />
-      <Route path="/" element={<ProductList products={products} />} />
-    </Routes>
-  </BrowserRouter>
-);
+// const App = () => (
+//   <BrowserRouter>
+//     <Routes>
+//       <Route path="/page/:pageNumber" element={<ProductList products={products} />} />
+//       <Route path="/product/:productId" element={<ProductDetail products={products} />} />
+//       <Route path="/" element={<ProductList products={products} />} />
+//     </Routes>
+//   </BrowserRouter>
+// );
+
+// const App = () => {
+//   const items = [
+//     { id: 1, text: 'First Item', color: 'red' },
+//     { id: 2, text: 'Second Item', color: 'blue' },
+//     { id: 3, text: 'Third Item', color: 'green' },
+//   ];
+
+//   const renderItem = (item, index) => (
+//     <span style={{ color: item.color }}>
+//       {index + 1}. {item.text}
+//     </span>
+//   );
+
+//   return (
+//     <div>
+//       <h1>Styled List</h1>
+//       <List items={items} renderItem={renderItem} />
+//     </div>
+//   );
+// };
+
+// function App() {
+//   return (
+//     <div>
+//       <Box>
+//         <h2>Hello world</h2>
+//         <p>мяу мяу</p>
+//       </Box>
+//       <Box>
+//         <h3>Марина</h3>
+//       </Box>
+//     </div>
+//   );
+// }
+
 
 // const userName = 'Marina';
 // return (

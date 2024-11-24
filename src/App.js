@@ -2,7 +2,9 @@ import './App.css';
 import React, { useState } from 'react';
 import ArticleDetails from './lesson4/ArticleDetails';
 import ArticleList from './lesson4/ArticleList';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Router } from 'react-router-dom';
+import ProductList from './lesson4/ProductList';
+import ProductDetail from './lesson4/ProductDetail';
 
 const articles = [
   { id: 1, title: 'Статья 1', content: 'Содержимое статьи 1' },
@@ -11,18 +13,38 @@ const articles = [
   { id: 4, title: 'Статья 4', content: 'Содержимое статьи 4' },
 ];
 
+const products = [
+  { id: 1, name: "Товар 1", description: "Описание товара 1", price: "100 руб." },
+  { id: 2, name: "Товар 2", description: "Описание товара 2", price: "200 руб." },
+  { id: 3, name: "Товар 3", description: "Описание товара 3", price: "300 руб." },
+  { id: 4, name: "Товар 4", description: "Описание товара 4", price: "400 руб." },
+  { id: 5, name: "Товар 5", description: "Описание товара 5", price: "500 руб." },
+  { id: 6, name: "Товар 6", description: "Описание товара 6", price: "600 руб." },
+]
+
+
+// const App = () => (
+//   <BrowserRouter> {/* Используем BrowserRouter */}
+//     <div>
+//       <h1>Приложение для просмотра статей</h1>
+//       <Routes>
+//         <Route path="/articles/:id" element={<ArticleDetails articles={articles} />} />
+//         <Route path="*" element={<ArticleList articles={articles} />} />
+//       </Routes>
+//     </div>
+//   </BrowserRouter>
+// );
 
 const App = () => (
-  <BrowserRouter> {/* Используем BrowserRouter */}
-    <div>
-      <h1>Приложение для просмотра статей</h1>
-      <Routes>
-        <Route path="/articles/:id" element={<ArticleDetails articles={articles} />} />
-        <Route path="*" element={<ArticleList articles={articles} />} />
-      </Routes>
-    </div>
+  <BrowserRouter>
+    <Routes>
+      <Route path="/page/:pageNumber" element={<ProductList products={products} />} />
+      <Route path="/product/:productId" element={<ProductDetail products={products} />} />
+      <Route path="/" element={<ProductList products={products} />} />
+    </Routes>
   </BrowserRouter>
 );
+
 // const userName = 'Marina';
 // return (
 // <div className='App'>

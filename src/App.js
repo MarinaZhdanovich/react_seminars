@@ -1,118 +1,118 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { useContext } from "react";
+import store from "./lesson5/Store";
+import Counter from "./lesson5/Counter";
+import { Provider } from 'react-redux'
+import { createContext, useState } from 'react';
 
-//React.Context помогает передавать данные "сверху вниз" по компонентам,
-//без необходимости явно передавать их через каждую "прослойку" в виде пропсов (props).
+//Создайте контексты UserContext и ThemeContext с начальными
+// значениями (например, имя пользователя: "Гость", тема: "светлая").
+// ● Реализуйте компонент App:
+// ○ Оберните дочерние компоненты в UserContext.Provider и
+// ThemeContext.Provider.
+// ○ Добавьте возможность изменения имени пользователя и
+// темы через интерфейс пользователя.
+// ● Создайте компоненты, использующие эти контексты:
+// ○ Header должен отображать приветствие с именем
+// пользователя.
+// ○ Profile может показывать более детальную информацию о
+// пользователе или просто использовать тему для стилизации.
+// ○ Footer должен использовать тему для стилизации и,
+// возможно, отображать копирайт с текущим годом.
+// ● Добавьте возможность изменения темы и имени пользователя в
+// интерфейсе, используя состояние в компоненте App и передавая
+// функции для изменения через контекст.
 
-const MessageContext = createContext(); // хранит данные доступные для всех компонентов
 
-function GrandParent() { // главный компонент. Он "оборачивает" другие компоненты в MessageContext.Provider,
-  //чтобы данные из контекста стали доступны всем его "детям".
+//Provider: Дает доступ к хранилищу (store) всему приложению. оборачивает
+// store={store}: какое именно хранилище использовать.
+
+const UserContext = createContext({
+  userName: 'Гость',
+  setUserName: () => { }, //пустая функция-заглушка. Когда компонент окружен Provider, значение по умолчанию, заданное в createContext, больше не используется. Вместо этого компонент получает данные из value, переданного в Provider.
+});
+const ThemeContext = createContext({
+  theme: 'light',
+  setTheme: () => { },
+  toggleTheme: () => { },
+});
+
+// oтображает приветствие с именем пользователя
+const Header = () => {
+  const { userName } = useContext(UserContext);
+
   return (
-    <MessageContext.Provider value="Hello from the top Context">
-      <Parent />
-    </MessageContext.Provider>
-  ); //Мы "заворачиваем" компонент Parent в Provider, чтобы сообщение "Hello from the top Context" стало доступным всем "внутри".
-}
-
-function Parent() {
-  return <Child />;
-}
-//Это просто промежуточные компоненты, они ничего не делают, просто передают управление дальше.
-//Они показывают, что данные можно передавать через много уровней вложенности, даже если промежуточные компоненты их не используют.
-function Child() {
-  return <GrandChild />;
-}
-
-function GrandChild() {
-  return <GrandGrandGrandChild />;
-}
-
-function GrandGrandGrandChild() {   //Это конечный компонент, который получает данные из контекста с помощью useContext и показывает их на экране.
-  const message = useContext(MessageContext);
-  return <span>{message}</span>;
-}
-
-const ThemeContext = createContext(); // контекст темы позволяет "делиться" информацией о текущей теме (цветах фона и текста) между компонентами.
-const NotesContext = createContext(); //хранит данные о списке заметок и функцию для добавления новых заметок.
-
-const useTheme = () => useContext(ThemeContext); //это пользовательские хуки, которые упрощают доступ к данным контекста. Вместо того чтобы каждый раз писать useContext(ThemeContext), можно просто вызвать useTheme().
-const useNotes = () => useContext(NotesContext);
-
-const NoteList = () => {
-  const { notes } = useNotes(); //Этот компонент берёт список заметок из NotesContext через useNotes() и отображает их в виде списка (<ul>).
-  return ( //деструктуризации достаем только notes из <NotesContext.Provider value={{ notes, addNote }}>
-    <ul>
-      {notes.map((note, index) => (
-        <li key={index}>{note}</li>
-      ))}
-    </ul>
+    <div>
+      <h1>Привет, {userName}!</h1>
+    </div>
   );
 };
 
-const NoteInput = () => { //Этот компонент содержит текстовое поле (<input>) для ввода новой заметки и кнопку для её добавления.
-  const [inputValue, setInputValue] = useState('');
-  const { addNote } = useNotes();
-
-  const handleInputChange = (event) => {
-    setInputValue(event.target.value);
-  }
-
-  const handleAddNote = () => {
-    addNote(inputValue);
-    setInputValue('')
-  };
+const Profile = () => {
+  const { userName, setUserName } = useContext(UserContext);
 
   return (
     <div>
-      <input value={inputValue} onChange={handleInputChange} />
-      <button onClick={handleAddNote}>Добавить</button>
-    </div>
-  )
-}
-
-const ThemeToggle = () => {   //Этот компонент переключает тему с помощью функции toggleTheme из ThemeContext.
-  const { theme, toggleTheme } = useTheme();
-  return (
-    <button onClick={toggleTheme}>Нажми чтобы переключить на {theme === 'light' ? 'темную' : 'светлую'} тему</button>
-  )
-}
-
-function App() {
-  const [theme, setTheme] = useState('light');
-  const [notes, setNotes] = useState(['Элемент списка 1', 'Элемент списка 2']);
-
-
-  const toggleTheme = () => {
-    setTheme((currentTheme) => (currentTheme === 'light' ? 'dark' : 'light'))
-  };
-
-  const addNote = (note) => {
-    setNotes((prevNotes) => [...prevNotes, note]);
-  }
-
-  return (
-    <div>
-      {/* <h1>Пример использования React.Context</h1>
-      <GrandParent /> */}
-
-      <ThemeContext.Provider value={{ theme, toggleTheme }}>
-        <NotesContext.Provider value={{ notes, addNote }}>
-          <div
-            className="content"
-            style={{
-              color: theme === 'light' ? 'black' : 'white', //Если тема 'light', текст будет чёрным, а фон — белым.
-              background: theme === 'light' ? 'white' : 'black',
-            }}
-          >
-            <h1>Список</h1>
-            <ThemeToggle />
-            <NoteList />
-            <NoteInput />
-          </div>
-        </NotesContext.Provider>
-      </ThemeContext.Provider>
+      <h2>Профиль</h2>
+      <label>
+        Изменить имя:
+        <input
+          type="text"
+          value={userName}
+          onChange={(e) => setUserName(e.target.value)}
+        />
+      </label>
     </div>
   );
-}
-//Позволяют передавать данные о теме и заметках вглубь дерева компонентов без ручной передачи через пропсы.
+};
+
+const Footer = () => {
+
+  return (
+    <div>
+      <p>© {new Date().getFullYear()} Все права защищены.</p>
+    </div>
+  );
+};
+
+const ThemeToggle = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  return (
+    <button onClick={toggleTheme}>
+      Переключить на {theme === 'light' ? 'тёмную' : 'светлую'} тему
+    </button>
+  );
+};
+
+
+const App = () => {
+  const [userName, setUserName] = useState('Гость');
+  const [theme, setTheme] = useState('light');
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+  return (
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <UserContext.Provider value={{ userName, setUserName }}>
+        <div
+          style={{
+            backgroundColor: theme === 'light' ? 'white' : 'black',
+            color: theme === 'light' ? 'black' : 'white',
+          }}
+        >
+          <Header />
+          <ThemeToggle />
+          <Profile />
+          <Footer />
+        </div>
+      </UserContext.Provider>
+    </ThemeContext.Provider>
+  );
+};
+// <Provider store={store}>
+//   <Counter />
+// </Provider>
+
+
 export default App;

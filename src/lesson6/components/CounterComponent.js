@@ -6,7 +6,7 @@ const CounterComponent = (props) => {
     <div>Count: {props.count}</div>
   );
 };
-
+//связывает данные из хранилища с пропсами компонента.
 const mapStateToProps = (state) => {
   return {
     count: state.counter.count

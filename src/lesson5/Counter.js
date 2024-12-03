@@ -11,7 +11,7 @@ const Counter = () => {
   const increment = () => {
     dispatch({ type: 'INCREMENT' }) //команда передаётся в редьюсер (case 'INCREMENT': return state + 1;)
   }
-
+  //редюсер функция, которая описывает, как состояние приложения (или его часть) должно изменяться в ответ на определенные действия (actions) в Redux.
   const decrement = () => {
     dispatch({ type: 'DECREMENT' })
   }

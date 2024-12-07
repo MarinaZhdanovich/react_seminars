@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { toggleTodo } from './lesson6_1/actions/todoActions'
-import { FilterContext } from './lesson6_1/contexts/FilterContext'
-import withFilter from './lesson6_1/hoc/withFilter';
+import { toggleTodo } from '../actions/todoActions'
+import { FilterContext } from '../contexts/FilterContext'
+import withFilter from '../hoc/withFilter';
 
 const TodoList = () => {
   const todos = useSelector(state => state.todos);
@@ -21,8 +21,9 @@ const TodoList = () => {
         <li
           key={todo.id}
           onClick={() => handleToggleTodo(todo.id)}
-          style={{ textDecoration: todo.comleted ? 'line-through' : 'none' }}
-        >{todo.text}
+          style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
+        >
+          {todo.text}
         </li>
       ))}
     </ul>

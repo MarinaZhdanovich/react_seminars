@@ -1,9 +1,9 @@
 import React from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux'; //useSelector позволяет извлекать состояние из хранилища Redux.
 import { removeTask } from '../reducers/tasksSlice';
 
 export const TaskList = () => {
-  const tasks = useSelector((state) => state.tasks); // Получаем список задач из store
+  const tasks = useSelector((state) => state.tasks); // Получаем список задач из store //часть состояния state.tasks
   const dispatch = useDispatch();
 
   const handleRemove = (id) => {
